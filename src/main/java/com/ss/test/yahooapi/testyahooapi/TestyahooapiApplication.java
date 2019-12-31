@@ -28,22 +28,21 @@ public class TestyahooapiApplication implements CommandLineRunner {
 	}
 	@Override
     public void run(String... args)  {
+		
 		LOG.info("EXECUTING : command line runner");
 		try {
-			readStock("INTC");
-			readStock("TRPL4.SA");
-			readStock("O");
-			getMulti();
+			readStock("FLMA11.SA");
+		//	readStock("TRPL4.SA");
+		//	readStock("O");
+		//	getMulti();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void readStock(String symbol){
+	public static void readStock(String symbol) throws IOException {
 		LOG.info("Lendo Dados do Stock :"+symbol);
   
-		try {
-			
 			Stock stock = YahooFinance.get(symbol);
  
 			BigDecimal price = stock.getQuote().getPrice();
@@ -59,13 +58,6 @@ public class TestyahooapiApplication implements CommandLineRunner {
 			System.out.println("Anual dividend  :"+dividend +" %");
 
 			stock.print();
-
-		}catch(IOException  e){
-			e.printStackTrace();
-		} catch(Exception e2 ){
-			e2.printStackTrace();
-
-		}
 	}
 
 	//MULTIPLE STOCKS AT ONCE
